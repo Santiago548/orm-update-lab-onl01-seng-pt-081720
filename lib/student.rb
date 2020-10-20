@@ -5,12 +5,22 @@ class Student
 
   # Remember, you can access your database connection anywhere in this class
   #  with DB[:conn]
+<<<<<<< HEAD
   attr_accessor :name, :grade, :id
 
   def initialize( id = nil, name, grade)
     @id = id
     @name = name
     @grade = grade
+=======
+  attr_accessor :name, :grade
+  attr_reader :id
+
+  def initialize(name, grade, id = nil)
+    @name = name
+    @grade = grade
+    @id = id
+>>>>>>> e3b4d495c2fce3589a43e70185a7783ca4114c19
   end
 
   def self.create_table
@@ -59,6 +69,7 @@ class Student
   end
 
   def self.find_by_name(name)
+<<<<<<< HEAD
     sql = <<-SQL
       SELECT *
       FROM students
@@ -69,6 +80,20 @@ class Student
     DB[:conn].execute(sql,name).map do |row|
       self.new_from_db(row)
     end.first
+=======
+    # find the student in the database given a name
+# return a new instance of the Student class
+sql = <<-SQL
+  SELECT *
+  FROM students
+  WHERE name = ?
+  LIMIT 1
+SQL
+
+DB[:conn].execute(sql,name).map do |row|
+  self.new_from_db(row)
+end.first
+>>>>>>> e3b4d495c2fce3589a43e70185a7783ca4114c19
   end
 
   def update
